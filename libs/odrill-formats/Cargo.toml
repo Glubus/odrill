@@ -1,0 +1,11 @@
+[package]
+name = "odrill-formats"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rkyv = { version = "0.7", features = ["validation"] }
+zstd = "0.13"
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "1.0"
+anyhow = "1.0"

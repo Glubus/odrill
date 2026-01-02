@@ -1,0 +1,24 @@
+[package]
+name = "{{name}}"
+version = "0.1.0"
+author = "Your Name"
+description = "A PAYDAY 2 mod created with odrill"
+
+[target]
+format = "superblt"
+
+# Early hook for localization
+[[hooks]]
+id = "lib/managers/menumanager"
+entry = "src/hooks/menumanager/mod.lua"
+output = "lua/Main.lua"
+
+# Chat hook for Hello World message
+[[hooks]]
+id = "lib/managers/chatmanager"
+entry = "src/hooks/chatmanager/mod.lua"
+output = "lua/ChatManager.lua"
+
+[options]
+minify = false
+strip_comments = false
