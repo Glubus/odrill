@@ -25,13 +25,16 @@ fn default_version() -> String {
 
 impl OdrillConfig {
     pub fn load() -> Result<Self> {
-        let path = Path::new("odrill.toml");
+        Self::load_from_path(Path::new("odrill.toml"))
+    }
+
+    pub fn load_from_path(path: &Path) -> Result<Self> {
         if !path.exists() {
-            anyhow::bail!("odrill.toml not found");
+            anyhow::bail!("{} not found", path.display());
         }
         let content = fs::read_to_string(path)?;
         let config: OdrillConfig =
-            toml::from_str(&content).context("Failed to parse odrill.toml")?;
+            toml::from_str(&content).context(format!("Failed to parse {}", path.display()))?;
         Ok(config)
     }
 

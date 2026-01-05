@@ -13,14 +13,14 @@ default-run = "odrill_bprints-cli"
 loco-rs = { version = "0.16" }
 
 [dependencies]
-loco-rs = { workspace = true  }
+loco-rs = { workspace = true }
 serde = { version = "1", features = ["derive"] }
 serde_json = { version = "1" }
 tokio = { version = "1.45", default-features = false, features = [
   "rt-multi-thread",
 ] }
 async-trait = { version = "0.1" }
-axum = { version = "0.8" }
+axum = "0.8"
 tracing = { version = "0.1" }
 tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
 regex = { version = "1.11" }
@@ -31,7 +31,7 @@ sea-orm = { version = "1.1", features = [
   "runtime-tokio-rustls",
   "macros",
 ] }
-chrono = { version = "0.4" }
+chrono = "0.4"
 validator = { version = "0.20" }
 uuid = { version = "1.6", features = ["v4"] }
 include_dir = { version = "0.7" }
@@ -39,8 +39,26 @@ include_dir = { version = "0.7" }
 fluent-templates = { version = "0.13", features = ["tera"] }
 unic-langid = { version = "0.9" }
 # /view engine
-axum-extra = { version = "0.10", features = ["form"] }
-odrill-formats = { version = "0.1.0", path = "../../libs/odrill-formats" }
+axum-extra = { version = "0.10", features = ["cookie", "form"] }
+container = { version = "0.1.0", path = "../../libs/container" }
+pkg = { version = "0.1.0", path = "../../libs/pkg" }
+templates = { version = "0.1.0", path = "../../libs/templates" }
+rkyv = { version = "0.7", features = ["validation"] }
+zstd = "0.13.3"
+blake3 = "1.8.2"
+utoipa = { version = "5.4.0", features = ["axum_extras"] }
+utoipa-scalar = "0.3.0"
+jsonwebtoken = { version = "10.2.0", features = ["rust_crypto"] }
+image = { version = "0.25.9", default-features = false, features = [
+  "jpeg",
+  "png",
+  "webp",
+] }
+tower-http = { version = "0.6.8", features = ["fs", "trace", "cors"] }
+rand = "0.9"
+hex = "0.4"
+toml = "0.9.10"
+
 
 [[bin]]
 name = "odrill_bprints-cli"

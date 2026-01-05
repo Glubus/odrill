@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="hero" style="padding: 3rem 0; text-align: left;">
+    <div style="display: flex; align-items: center; gap: 2rem;">
+        <img src="/uploads/avatars/{{ user.pid }}.webp" 
+             onerror="this.src='https://ui-avatars.com/api/?name={{ user.name }}&background=random&size=128'" 
+             class="avatar-circle" 
+             style="width: 100px; height: 100px;">
+        <div>
+            <h1>{{ user.name | default(value="User") }}</h1>
+            <p style="color: var(--text-muted);">Member since 2024</p>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div style="border-bottom: 1px solid var(--border); padding-bottom: 1rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
+        <h2>My Packages</h2>
+        <a href="/packages/publish" class="btn btn-primary btn-sm"><i data-lucide="plus"></i> Publish New</a>
+    </div>
+    
+    <div class="empty-state" style="padding: 2rem 0;">
+        <i data-lucide="package" style="color: var(--text-muted);"></i>
+        <p>You haven't published any packages yet.</p>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- Security Section Partial -->
+<section id="security" class="settings-section">
+    <div class="section-header">
+        <h2>Security</h2>
+        <p>Manage your password and two-factor authentication</p>
+    </div>
+
+    <form id="passwordForm" style="max-width: 400px;">
+        <div class="form-group">
+            <label>Current Password</label>
+            <input type="password" id="currentPassword" class="form-control" placeholder="••••••••">
+        </div>
+        <div class="form-group">
+            <label>New Password</label>
+            <input type="password" id="newPassword" class="form-control" placeholder="••••••••">
+        </div>
+        <div class="form-group">
+            <label>Confirm New Password</label>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Password</button>
+    </form>
+
+    <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+        <h3 style="font-size: 1rem; margin-bottom: 0.5rem;">Two-Factor Authentication</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+            Add an extra layer of security to your account.
+        </p>
+        <button class="btn btn-secondary" disabled>
+            <i data-lucide="smartphone"></i> Enable 2FA (Coming Soon)
+        </button>
+    </div>
+</section>

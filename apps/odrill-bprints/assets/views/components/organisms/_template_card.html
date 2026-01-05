@@ -1,0 +1,27 @@
+{# Organisms: Template Card #}
+{% import "components/molecules/_download_badge.html" as badge %}
+{% import "components/atoms/_tag.html" as tag_atom %}
+{% macro render(template) %}
+
+<a href="/templates/{{ template.guid }}" class="card template-card">
+    <div class="template-card-header">
+        <h3>{{ template.display_name }}</h3>
+        {{ badge::render(count=template.download_count) }}
+    </div>
+    
+    <div class="template-meta">
+        <span class="creator">by {{ template.creator }}</span>
+        <span class="version">v{{ template.version }}</span>
+    </div>
+
+    {% if template.description %}
+    <p class="template-description">{{ template.description | truncate(length=100) }}</p>
+    {% endif %}
+    
+    <div class="template-tags">
+        {% for tag in template.tags %}
+            {{ tag_atom::render(text=tag) }}
+        {% endfor %}
+    </div>
+</a>
+{% endmacro %}

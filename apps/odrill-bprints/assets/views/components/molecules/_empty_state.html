@@ -1,0 +1,14 @@
+{# Molecules: Empty State #}
+{% import "components/atoms/_button.html" as btn %}
+{% macro render(title, message, icon="package-open", cta_text="", cta_href="", cta_icon="") %}
+<div class="empty-state">
+    <i data-lucide="{{ icon }}"></i>
+    <h3>{{ title }}</h3>
+    <p>{{ message }}</p>
+    {% if cta_text %}
+        <div style="margin-top: 1rem;">
+             {{ btn::render(text=cta_text, href=cta_href, variant="btn-primary", icon=cta_icon) }}
+        </div>
+    {% endif %}
+</div>
+{% endmacro %}

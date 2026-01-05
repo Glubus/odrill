@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% import "components/molecules/_page_header.html" as header %}
+{% import "components/molecules/_hero_search.html" as hero_search %}
+{% import "components/molecules/_empty_state.html" as empty %}
+{% import "components/organisms/_template_card.html" as template_card %}
+
+{% block title %}Templates - Odrill{% endblock %}
+
+{% block content %}
+<div class="hero">
+    {{ header::render(
+        title="Templates", 
+        description="Ready-to-use project starters created by the community. Kickstart your next mod."
+    ) }}
+    
+    {{ hero_search::render(
+        placeholder="Search templates...",
+        query=query
+    ) }}
+</div>
+
+{% if templates | length > 0 %}
+<div class="item-grid">
+    {% for template in templates %}
+        {{ template_card::render(template=template) }}
+    {% endfor %}
+</div>
+{% else %}
+    {{ empty::render(
+        title="No templates found",
+        message="Try adjusting your search or check back later.",
+        icon="layout-template"
+    ) }}
+{% endif %}
+
+{% endblock %}

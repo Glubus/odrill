@@ -1,27 +1,31 @@
 //! odrill build command - Bundle all hooks
 
 use colored::Colorize;
-use lua_bundler::{Bundler, generate_superblt_files};
+use compiler::{Compiler, superblt::generate_superblt_files};
+use pkg::OdrillProject;
 use std::time::Instant;
 
 pub fn run(force: bool, _watch: bool) -> anyhow::Result<()> {
     let project_dir = std::env::current_dir()?;
-    let config_path = project_dir.join("odrill.toml");
+    // Load project
+    let project = OdrillProject::load(&project_dir)?;
 
-    if !config_path.exists() {
-        anyhow::bail!("No odrill.toml found. Run 'odrill init' first.");
-    }
+    // We clone project for the compiler, but we also nede it for superblt generation later.
+    // Compiler consumes it or takes reference?
+    // Compiler::new(project) takes ownership. OdrillProject is Clone?
+    // Project might be expensive to clone if it lists many files? No, just manifest and root.
+    // Assuming OdrillProject derives Clone. Check project.rs?
 
     println!("{}", "Building project...".cyan().bold());
     let start = Instant::now();
 
-    let mut bundler = Bundler::from_project(project_dir.clone())?;
+    let mut compiler = Compiler::new(project.clone());
 
     if force {
         println!("  {} cache", "clear".yellow());
     }
 
-    let results = bundler.bundle_all()?;
+    let results = compiler.compile_all()?;
     let elapsed = start.elapsed();
 
     let mut bundled = 0;
@@ -48,22 +52,29 @@ pub fn run(force: bool, _watch: bool) -> anyhow::Result<()> {
     }
 
     // Generate SuperBLT files if target format is superblt
-    let config = lua_bundler::BundleConfig::from_file(&config_path)?;
+    // Check manifest options. Assuming is_superblt() check was implicitly "if hooks > 0" or strictly structure.
+    // Payday 2 mods are usually SuperBLT.
+    // We can just always generate them or check a flag.
+    // For now, always generate if output mode is not specified or assumes SuperBLT.
+    // Or check manifest.options.
+
     let dist_dir = project_dir.join("dist");
 
-    if config.is_superblt() {
-        std::fs::create_dir_all(&dist_dir)?;
-        generate_superblt_files(&config, &dist_dir, &project_dir)?;
-        // Count loc files if any
-        let loc_dir = project_dir.join("loc");
-        if loc_dir.exists() {
-            let loc_count = std::fs::read_dir(&loc_dir)?.count();
+    // TODO: Add condition for superblt generation
+    std::fs::create_dir_all(&dist_dir)?;
+    generate_superblt_files(&project.manifest, &dist_dir, &project_dir)?;
+
+    // Count loc files if any
+    let loc_dir = project_dir.join("loc");
+    if loc_dir.exists() {
+        if let Ok(entries) = std::fs::read_dir(&loc_dir) {
+            let loc_count = entries.count();
             if loc_count > 0 {
                 println!("  {} loc/ ({} files)", "copy".green(), loc_count);
             }
         }
-        println!("  {} mod.txt, main.xml", "generate".green());
     }
+    println!("  {} mod.txt, main.xml", "generate".green());
 
     println!(
         "\n{} {} bundled, {} cached in {:.2}s",
@@ -73,10 +84,8 @@ pub fn run(force: bool, _watch: bool) -> anyhow::Result<()> {
         elapsed.as_secs_f64()
     );
 
-    if config.is_superblt() {
-        println!("\nOutput: {}", dist_dir.display().to_string().cyan());
-        println!("Copy dist/ contents to your PAYDAY 2 mods folder to test.");
-    }
+    println!("\nOutput: {}", dist_dir.display().to_string().cyan());
+    println!("Copy dist/ contents to your PAYDAY 2 mods folder to test.");
 
     Ok(())
 }

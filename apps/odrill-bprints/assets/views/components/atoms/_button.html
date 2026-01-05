@@ -1,0 +1,14 @@
+{# Atoms: Button #}
+{% macro render(text, variant="btn-secondary", icon="", href="", type="button", onclick="", class="") %}
+{% if href %}
+<a href="{{ href }}" class="btn {{ variant }} {{ class }}">
+    {% if icon %}<i data-lucide="{{ icon }}"></i>{% endif %}
+    {{ text }}
+</a>
+{% else %}
+<button type="{{ type }}" class="btn {{ variant }} {{ class }}" {% if onclick %}onclick="{{ onclick }}"{% endif %}>
+    {% if icon %}<i data-lucide="{{ icon }}"></i>{% endif %}
+    {{ text }}
+</button>
+{% endif %}
+{% endmacro %}

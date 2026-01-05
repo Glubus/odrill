@@ -1,0 +1,17 @@
+[package]
+name = "compiler"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "A Lua module bundler and minifier library"
+
+[dependencies]
+pkg = { path = "../pkg", version = "0.1.0" }
+thiserror.workspace = true
+anyhow.workspace = true
+walkdir.workspace = true
+regex.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+toml.workspace = true

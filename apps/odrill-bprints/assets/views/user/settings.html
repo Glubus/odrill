@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Settings{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.css">
+{% endblock %}
+
+{% block content %}
+<h1>Settings</h1>
+
+<div class="settings-layout">
+    <nav class="settings-nav">
+        <a href="#profile" class="active" data-section="profile">
+            <i data-lucide="user"></i> Profile
+        </a>
+        <a href="#keys" data-section="keys">
+            <i data-lucide="key"></i> API Keys
+        </a>
+        <a href="#security" data-section="security">
+            <i data-lucide="shield"></i> Security
+        </a>
+        <a href="#delete" data-section="delete">
+            <i data-lucide="trash-2"></i> Delete Account
+        </a>
+    </nav>
+
+    <div class="settings-content">
+        {% include "user/settings/_profile.html" %}
+        {% include "user/settings/_keys.html" %}
+        {% include "user/settings/_security.html" %}
+        {% include "user/settings/_delete.html" %}
+    </div>
+</div>
+
+{% include "user/settings/_modal_cropper.html" %}
+{% include "user/settings/_modal_create_key.html" %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.1/cropper.min.js"></script>
+<script src="/static/js/settings.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        initSettings('{{ user.pid }}');
+    });
+</script>
+{% endblock %}

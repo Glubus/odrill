@@ -1,0 +1,34 @@
+<!-- API Keys Section Partial -->
+<section id="keys" class="settings-section">
+    <div class="section-header">
+        <h2>API Keys</h2>
+        <p>Manage CLI access tokens for publishing packages</p>
+    </div>
+    
+    <div id="newKeyDisplay" class="new-key-display" style="display: none;">
+        <div class="key-header">
+            <i data-lucide="check-circle"></i>
+            <span>New API Key Created</span>
+        </div>
+        <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">
+            Copy this key now. You won't be able to see it again.
+        </p>
+        <div class="new-key-code">
+            <code id="newKeyValue"></code>
+            <button type="button" onclick="copyNewKey()" title="Copy to clipboard">
+                <i data-lucide="copy"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="api-keys-header">
+        <span style="color: var(--text-muted); font-size: 0.9rem;">Your active keys</span>
+        <button class="btn btn-primary btn-sm" onclick="showCreateKeyModal()">
+            <i data-lucide="plus"></i> New Key
+        </button>
+    </div>
+
+    <div id="apiKeysList" class="api-keys-list">
+        <p style="color: var(--text-muted);">Loading...</p>
+    </div>
+</section>

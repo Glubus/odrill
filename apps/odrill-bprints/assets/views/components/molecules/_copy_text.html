@@ -1,0 +1,9 @@
+{# Molecules: Copy Text #}
+{% macro render(text) %}
+<div class="new-key-code" style="margin: 1.5rem 0;">
+    <code>{{ text }}</code>
+    <button type="button" onclick="copyToClipboard('{{ text | escape }}', this)" title="Copy to clipboard">
+        <i data-lucide="copy"></i>
+    </button>
+</div>
+{% endmacro %}

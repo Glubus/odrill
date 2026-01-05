@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% import "components/atoms/_button.html" as btn %}
+{% import "components/atoms/_tag.html" as tag_atom %}
+{% import "components/molecules/_download_badge.html" as badge %}
+{% import "components/molecules/_copy_text.html" as copy %}
+
+{% block title %}{{ template.display_name }} - Odrill{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="package-main-content">
+        <div class="inner-content-grid">
+            <div class="left-column">
+                <div class="package-card-header">
+                    <div>
+                        <h1 class="package-name" style="font-size: 2.5rem;">{{ template.display_name }}</h1>
+                        <p style="color: var(--text-secondary); margin-top: 0.5rem; font-family: var(--font-mono);">
+                            {{ template.name }}
+                        </p>
+                    </div>
+                     <div style="text-align: right;">
+                        {{ btn::render(
+                            href="/api/templates/" ~ template.guid ~ "/download", 
+                            text="Download", 
+                            variant="btn-primary", 
+                            icon="download"
+                        ) }}
+                        <div style="margin-top: 0.5rem;">
+                            {{ badge::render(count=template.download_count) }}
+                        </div>
+                    </div>
+                </div>
+
+                {% if template.description %}
+                <div style="margin: 2rem 0;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Description</h3>
+                    <p style="color: var(--text-secondary); line-height: 1.6;">{{ template.description }}</p>
+                </div>
+                {% endif %}
+
+                <div style="margin-bottom: 2rem;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: 1rem;">Usage</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">To use this template with odrill CLI:</p>
+                    {{ copy::render(text="odrill new " ~ template.name) }}
+                </div>
+            </div>
+
+            <div class="versions-sidebar-inner">
+                <h2 style="font-size: 1.25rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i data-lucide="info"></i>
+                    Details
+                </h2>
+                
+                <div style="display: flex; flex-direction: column; gap: 1rem;">
+                    <div>
+                        <span style="color: var(--text-muted); font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">Version</span>
+                        <span style="font-family: var(--font-mono);">v{{ template.version | default(value="1.0.0") }}</span>
+                    </div>
+
+                    <div>
+                        <span style="color: var(--text-muted); font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">Updated</span>
+                        <span style="font-family: var(--font-sans);">{{ template.updated_at }}</span>
+                    </div>
+                    
+                    <div>
+                        <span style="color: var(--text-muted); font-size: 0.85rem; display: block; margin-bottom: 0.5rem;">Tags</span>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            {% for tag in template.tags %}
+                                {{ tag_atom::render(text=tag) }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

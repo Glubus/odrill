@@ -1,0 +1,50 @@
+{# Organisms: Navbar #}
+{# Usage: {% include "components/organisms/_navbar.html" with { user: user } %} #}
+
+<header class="navbar">
+    <a href="/" class="logo">
+        <i data-lucide="terminal"></i>
+        <span>odrill</span>
+    </a>
+    
+    <nav>
+        <a href="/">
+            <i data-lucide="package"></i> Packages
+        </a>
+        <a href="/templates">
+            <i data-lucide="code-2"></i> Templates
+        </a>
+        
+        {% if user %}
+        <div class="dropdown">
+            <div class="dropdown-trigger">
+                <img src="/uploads/avatars/{{ user.pid }}.webp" 
+                     onerror="this.src='https://ui-avatars.com/api/?name={{ user.name }}&background=random&size=64'"
+                     class="avatar-circle"
+                     style="object-fit: cover;">
+                <span>{{ user.name }}</span>
+                <i data-lucide="chevron-down" style="width: 16px; height: 16px;"></i>
+            </div>
+            <div class="dropdown-menu">
+                <a href="/profile" class="dropdown-item">
+                    <i data-lucide="user"></i> Profile
+                </a>
+                <a href="/settings" class="dropdown-item">
+                    <i data-lucide="settings"></i> Settings
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="/auth/logout" class="dropdown-item" style="color: var(--error);">
+                    <i data-lucide="log-out"></i> Sign Out
+                </a>
+            </div>
+        </div>
+        {% else %}
+        <a href="/login" style="color: var(--text-primary);">
+            <i data-lucide="log-in"></i> Sign In
+        </a>
+        <a href="/register" class="btn btn-primary" style="padding: 0.4rem 0.8rem; font-size: 0.9rem;">
+            <i data-lucide="user-plus" style="width: 16px; height: 16px;"></i> Register
+        </a>
+        {% endif %}
+    </nav>
+</header>

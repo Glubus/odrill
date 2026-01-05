@@ -1,0 +1,21 @@
+<!-- Delete Account Section Partial -->
+<section id="delete" class="settings-section">
+    <div class="section-header">
+        <h2>Delete Account</h2>
+        <p>Permanently delete your account and all associated data</p>
+    </div>
+
+    <div class="danger-zone">
+        <h3>Danger Zone</h3>
+        <p style="margin: 0 0 1.5rem 0; font-size: 0.9rem;">
+            Once you delete your account, there is no going back. All your packages will be orphaned.
+        </p>
+        <div class="form-group" style="max-width: 400px;">
+            <label>Type <strong>DELETE MY ACCOUNT</strong> to confirm</label>
+            <input type="text" id="deleteConfirm" class="form-control" placeholder="DELETE MY ACCOUNT">
+        </div>
+        <button class="btn" style="background: var(--error); color: white;" id="deleteAccountBtn" disabled>
+            <i data-lucide="trash-2"></i> Delete My Account
+        </button>
+    </div>
+</section>

@@ -21,11 +21,11 @@ server:
   # Binding for the server (which interface to bind to)
   binding: localhost
   # The UI hostname or IP address that mailers will point to.
-  host: http://localhost
+  host: http://localhost:5150
   # Out of the box middleware configuration. to disable middleware you can changed the `enable` field to `false` of comment the middleware block
   middlewares:
     static:
-      enable: true
+      enable: false
       must_exist: true
       precompressed: false
       folder:
@@ -68,10 +68,15 @@ mailer:
 #      - client_identifier: google # Identifier for the OAuth2 provider. Replace 'google' with your provider's name if different, must be unique within the oauth2 config.
 #        ... other fields
 
+# Cache Configuration
+cache:
+  kind: InMem
+
 # Database Configuration
 database:
   # Database connection URI
-  uri: {{ get_env(name="DATABASE_URL", default="sqlite://odrill-bprints_development.sqlite?mode=rwc") }}
+  # Database connection URI
+  uri: {{ get_env(name="DATABASE_URL", default="postgres://odrill:odrill@localhost:5432/odrill_dev") }}
   # When enabled, the sql query will be logged.
   enable_logging: false
   # Set the timeout duration when acquiring a connection.

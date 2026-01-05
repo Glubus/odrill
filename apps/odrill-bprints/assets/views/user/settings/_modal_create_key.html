@@ -1,0 +1,48 @@
+<!-- Create API Key Modal Partial -->
+<div id="createKeyModal" class="modal">
+    <div class="modal-content">
+        <h3>Create New API Key</h3>
+        <form id="createKeyForm">
+            <div class="form-group">
+                <label>Key Name</label>
+                <input type="text" id="keyName" class="form-control" placeholder="My CLI Key" required>
+            </div>
+            <div class="form-group">
+                <label>Permissions</label>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 400;">
+                        <input type="checkbox" name="permissions" value="publish" checked> Publish packages
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 400;">
+                        <input type="checkbox" name="permissions" value="templates:publish" checked> Publish templates
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 400;">
+                        <input type="checkbox" name="permissions" value="yank"> Yank versions
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 400;">
+                        <input type="checkbox" name="permissions" value="delete"> Delete packages
+                    </label>
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-weight: 400;">
+                        <input type="checkbox" name="permissions" value="templates:delete"> Delete templates
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Expiration</label>
+                <select id="expireOn" class="form-control">
+                    <option value="Never">Never expires</option>
+                    <option value="Date">Expires after N days</option>
+                    <option value="Usage">Expires after N uses</option>
+                </select>
+            </div>
+            <div id="expireValueGroup" class="form-group" style="display: none;">
+                <label id="expireValueLabel">Value</label>
+                <input type="number" id="expireValue" class="form-control" placeholder="30">
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="closeCreateKeyModal()">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create Key</button>
+            </div>
+        </form>
+    </div>
+</div>

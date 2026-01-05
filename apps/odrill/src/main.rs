@@ -1,7 +1,11 @@
 //! odrill - Lua bundler CLI for PAYDAY 2 mods
 
+mod auth;
 mod commands;
 mod config;
+pub mod config_global;
+pub mod constants;
+pub mod template_engine; // [NEW]
 
 use clap::{Parser, Subcommand};
 use colored::Colorize;
@@ -18,20 +22,8 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Commands {
-    /// Initialize a new project
-    Init {
-        /// Project name (or "." for current dir)
-        #[arg(default_value = ".")]
-        name: String,
-
-        /// Template to use: "odrill" (default) or "superblt"
-        #[arg(short, long)]
-        template: Option<String>,
-
-        /// Skip git initialization
-        #[arg(long)]
-        no_git: bool,
-    },
+    /// Create a new project (from template)
+    New(commands::new::NewArgs),
 
     /// Build the project (bundle all hooks)
     Build {
@@ -66,22 +58,49 @@ enum Commands {
 
     /// Publish package to registry
     Publish(commands::publish::PublishArgs),
+
+    /// Install dependencies from odrill.toml
+    Install,
+
+    /// Run project in isolated dev environment
+    Run {
+        /// Project path (optional)
+        path: Option<String>,
+    },
+
+    /// Login to registry
+    Login,
+
+    /// Logout from registry
+    Logout,
+
+    /// Manage global configuration
+    Config(commands::config::ConfigArgs),
+
+    /// Manage templates
+    Templates(commands::templates::TemplatesArgs),
 }
 
 fn main() {
     let cli = Cli::parse();
 
     let result = match cli.command {
-        Commands::Init {
-            name,
-            template,
-            no_git,
-        } => commands::init::run(&name, !no_git, template.as_deref()),
+        Commands::New(args) => commands::new::run(args),
         Commands::Build { force, watch } => commands::build::run(force, watch),
         Commands::Clean => commands::clean::run(),
         Commands::Add { hook_id, output } => commands::add::run(&hook_id, output.as_deref()),
         Commands::Fmt { check } => commands::fmt::run(commands::fmt::FmtArgs { check }),
         Commands::Publish(args) => commands::publish::run(args),
+        Commands::Install => commands::install::run(),
+        Commands::Run { path } => commands::run::run(path),
+        Commands::Login => commands::login::run(),
+        Commands::Logout => {
+            let _ = auth::clear_token();
+            println!("👋 Logged out");
+            Ok(())
+        }
+        Commands::Config(args) => commands::config::run(args),
+        Commands::Templates(args) => commands::templates::run(args),
     };
 
     if let Err(e) = result {

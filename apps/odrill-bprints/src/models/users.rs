@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use chrono::{offset::Local, Duration};
+use chrono::{Duration, offset::Local};
 use loco_rs::{auth::jwt, hash, prelude::*};
 use serde::{Deserialize, Serialize};
 use serde_json::Map;
@@ -92,6 +92,16 @@ impl Model {
             )
             .one(db)
             .await?;
+        user.ok_or_else(|| ModelError::EntityNotFound)
+    }
+
+    /// finds a user by their database id
+    ///
+    /// # Errors
+    ///
+    /// When could not find user or DB query error
+    pub async fn find_by_id(db: &DatabaseConnection, id: i64) -> ModelResult<Self> {
+        let user = users::Entity::find_by_id(id).one(db).await?;
         user.ok_or_else(|| ModelError::EntityNotFound)
     }
 
@@ -263,6 +273,34 @@ impl Model {
         jwt::JWT::new(secret)
             .generate_token(expiration, self.pid.to_string(), Map::new())
             .map_err(ModelError::from)
+    }
+
+    /// Extract authenticated user from cookie token
+    ///
+    /// # Arguments
+    /// * `ctx` - Application context
+    /// * `jar` - Cookie jar from request
+    ///
+    /// # Returns
+    /// Option containing the user model if authenticated
+    pub async fn from_cookie(
+        ctx: &AppContext,
+        jar: &axum_extra::extract::cookie::CookieJar,
+    ) -> Option<Self> {
+        let token = jar.get("odrill_token")?;
+        let auth_config = ctx.config.auth.as_ref()?;
+        let secret = &auth_config.jwt.as_ref()?.secret;
+        let validation = jsonwebtoken::Validation::default();
+
+        let data = jsonwebtoken::decode::<serde_json::Value>(
+            token.value(),
+            &jsonwebtoken::DecodingKey::from_secret(secret.as_bytes()),
+            &validation,
+        )
+        .ok()?;
+
+        let pid = data.claims["pid"].as_str()?;
+        Self::find_by_pid(&ctx.db, pid).await.ok()
     }
 }
 

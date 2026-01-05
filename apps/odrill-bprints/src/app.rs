@@ -53,6 +53,32 @@ impl Hooks for App {
         AppRoutes::with_default_routes() // controller routes below
             .add_route(controllers::auth::routes())
             .add_route(controllers::packages::routes())
+            .add_route(controllers::pages::routes())
+            .add_route(controllers::templates::routes())
+            .add_route(controllers::user::routes())
+    }
+
+    async fn after_routes(router: axum::Router, _ctx: &AppContext) -> Result<axum::Router> {
+        let uploads = tower_http::services::ServeDir::new("assets/uploads");
+
+        // Custom static serve with caching
+        let static_assets = tower_http::services::ServeDir::new("assets/static")
+            .precompressed_gzip()
+            .precompressed_br();
+
+        let static_router = axum::Router::new()
+            .nest_service("/static", static_assets)
+            .layer(
+                tower_http::set_header::SetResponseHeaderLayer::if_not_present(
+                    axum::http::header::CACHE_CONTROL,
+                    axum::http::HeaderValue::from_static("public, max-age=31536000, immutable"),
+                ),
+            );
+
+        Ok(router
+            .merge(static_router)
+            .nest_service("/uploads", uploads)
+            .nest("/api", crate::openapi::router()))
     }
     async fn connect_workers(ctx: &AppContext, queue: &Queue) -> Result<()> {
         queue.register(DownloadWorker::build(ctx)).await?;

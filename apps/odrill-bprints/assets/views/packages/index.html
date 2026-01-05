@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% import "components/molecules/_page_header.html" as header %}
+{% import "components/molecules/_hero_search.html" as hero_search %}
+{% import "components/molecules/_empty_state.html" as empty %}
+{% import "components/organisms/_package_card.html" as package_card %}
+
+{% block title %}Package Registry{% endblock %}
+
+{% block content %}
+<div class="hero">
+    {{ header::render(
+        title="Odrill Package Registry", 
+        description="The modern package manager for Payday 2 mods. Find, publish, and share Lua libraries."
+    ) }}
+    
+    {{ hero_search::render(
+        placeholder="Search packages...",
+        query=query
+    ) }}
+</div>
+
+{% if packages | length == 0 %}
+    {% if user %}
+        {{ empty::render(
+            title="No packages yet",
+            message="Be the first to publish a package!",
+            icon="package-open",
+            cta_text="Publish Package",
+            cta_href="/packages/publish",
+            cta_icon="plus"
+        ) }}
+    {% else %}
+        {{ empty::render(
+            title="No packages yet",
+            message="Be the first to publish a package!",
+            icon="package-open",
+            cta_text="Get Started",
+            cta_href="/register",
+            cta_icon="plus"
+        ) }}
+    {% endif %}
+{% else %}
+<div class="item-grid">
+    {% for pkg in packages %}
+        {{ package_card::render(package=pkg) }}
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

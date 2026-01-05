@@ -1,0 +1,19 @@
+{# Organisms: Package Card #}
+{% import "components/molecules/_download_badge.html" as badge %}
+{% macro render(package) %}
+
+<a href="/packages/{{ package.name }}" class="card package-card">
+    <div class="package-card-header">
+        <h3 class="package-name">{{ package.name }}</h3>
+        {{ badge::render(count=package.downloads) }}
+    </div>
+    
+    <div class="package-version">{{ package.latest_version | default(value="0.0.0") }}</div>
+    
+    {% if package.description %}
+    <p class="package-desc">{{ package.description | truncate(length=100) }}</p>
+    {% endif %}
+    
+    {# Optional stats or tags could go here #}
+</a>
+{% endmacro %}

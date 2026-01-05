@@ -1,0 +1,12 @@
+{# Molecules: Search Form #}
+{% macro render(query="", placeholder="Search...") %}
+<div class="search-section">
+    <form class="search-form">
+        <div class="search-input-wrapper">
+            <i data-lucide="search"></i>
+            <input type="text" name="q" placeholder="{{ placeholder }}" class="form-control" value="{{ query }}">
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+</div>
+{% endmacro %}

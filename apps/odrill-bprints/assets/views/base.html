@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Odrill{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css?v=4">
+    <script src="/static/js/icons.js"></script>
+    <script src="/static/js/clipboard.js" defer></script>
+    <script src="/static/js/dropdown.js" defer></script>
+    <script src="/static/js/main.js" defer></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% include "components/organisms/_navbar.html" %}
+    
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

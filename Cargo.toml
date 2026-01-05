@@ -1,6 +1,12 @@
 [workspace]
 resolver = "2"
-members = ["libs/lua-bundler", "libs/odrill-cache", "apps/odrill", "libs/odrill-formats"]
+members = [
+    "libs/compiler",
+    "apps/odrill",
+    "libs/container",
+    "libs/pkg",
+    "libs/templates",
+]
 
 [workspace.package]
 version = "0.1.0"
@@ -20,3 +26,4 @@ anyhow = "1"
 walkdir = "2"
 regex = "1"
 colored = "2"
+blake3 = "1.5"

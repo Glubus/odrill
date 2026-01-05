@@ -1,0 +1,14 @@
+[package]
+name = "container"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pkg = { path = "../pkg", version = "0.1.0" }
+serde = { workspace = true }
+rkyv = { version = "0.7", features = ["validation"] }
+zstd = "0.13"
+anyhow = { workspace = true }
+thiserror = { workspace = true }
+regex = { workspace = true }
+walkdir = { workspace = true }

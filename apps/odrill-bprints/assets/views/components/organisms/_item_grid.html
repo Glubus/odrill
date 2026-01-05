@@ -1,0 +1,16 @@
+{# Organisms: Item Grid #}
+{# Usage: {% include "components/organisms/_item_grid.html" %} - Wrap items inside in caller #}
+
+<div class="item-grid">
+    {# Items will be injected here by the caller using block or simple loop content #}
+    {# Actually Jinja includes don't support blocks easily. We'll use this class in the parent div #}
+</div> 
+
+{# Correction: Since this is just a wrapper div, we can either define it as a shared macro in macros.html (if supported) or just rely on CSS class 'item-grid' on the parent page. 
+   Given this is Tera/Loco, let's stick to using the CSS class 'item-grid' directly in the pages, 
+   or creating a basic layout component if we want to enforce consistency.
+   
+   For now, I'll create this file but mainly to document the CSS class usage or if we want to add wrapper logic later.
+   Actually, let's make it a macro if possible? No, simply use the CSS in style.css #}
+
+{# Empty for now, will handle grid via CSS class 'item-grid' #}
