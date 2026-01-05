@@ -30,7 +30,7 @@ odrill run
 
 ### From Source
 ```bash
-git clone https://github.com/your-username/odrill.git
+git clone https://github.com/Glubus/odrill.git
 cd odrill
 cargo install --path apps/odrill
 ```
