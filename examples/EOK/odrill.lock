@@ -1,0 +1,16 @@
+version = 1
+
+[packages.colors]
+version = "1.0.0"
+checksum = "24e1bfb2dbcb3e3fec20eaa58bee2aedba890bba9842a2d64f92855701f25bb9"
+source = "http://localhost:5150"
+
+[packages.specials]
+version = "1.0.0"
+checksum = "75aa2a6eb133b52d9ddd1e726d600f8a24e06d939cec8c6ee8e90703fdf34c2b"
+source = "http://localhost:5150"
+
+[packages.math]
+version = "1.0.0"
+checksum = "5aeb8e0535c117444a1449219cf75b07cc5663fe673bd4255ec49a62137deba2"
+source = "http://localhost:5150"

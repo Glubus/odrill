@@ -1,0 +1,239 @@
+{
+	"menu_id" : "EXPOK_menu",
+	"parent_menu_id" : "blt_options",
+	"title" : "exec_EXPOK_title",
+	"description":"exec_EXPOK_desc",
+	"back_callback" : "EXPOK_closed",
+	"items" : [
+        {
+			"type" : "toggle",
+			"id" : "EXPOK_gain_exp_on_kills",
+			"title" : "EXPOK_gain_exp_on_kills_title",
+			"description" : "EXPOK_gain_exp_on_kills_desc",
+			"callback" : "callback_EXPOK_gain_exp_on_kills",
+			"value" : "gain_exp_on_kills",
+			"default_value" : true
+		},
+		{
+			"type" : "toggle",
+			"id" : "EXPOK_disable_hud_effects",
+			"title" : "EXPOK_disable_hud_effects_title",
+			"description" : "EXPOK_disable_hud_effects_desc",
+			"callback" : "callback_EXPOK_disable_hud_effects",
+			"value" : "disable_hud_effects",
+			"default_value" : false
+		},
+		{
+			"type" : "multiple_choice",
+			"id" : "anim_choice_style_exp",
+			"title" : "anim_choice_style_exp_title",
+			"description" : "anim_choice_style_exp_desc",
+			"callback" : "anim_choice_style_exp_callback",
+			"items" : [
+				"og_anim",
+        		"modern_anim"
+			],
+			"value" : "anim_choice_style",
+			"default_value" : 2
+		},
+        { 
+			"type" : "divider",
+			"size" : 20
+		},
+		{
+			"type" : "multiple_choice",
+			"id" : "exp_color_change",
+			"title" : "exp_color_change_title",
+			"description" : "exp_color_change_desc",
+			"callback" : "exp_color_change_callback",
+			"items" : [
+				"pastel_pink_lai",
+        		"purple_lai",
+        		"aqua_lai",
+        		"strawb_lai",
+        		"orange_lai",
+        		"red_lai",
+        		"navy_lai",
+        		"pink_lai",
+        		"lilac_lai",
+        		"black_lai",
+        		"blue_violet_lai",
+        		"white_lai",
+				"green_lai",
+				"yellow_lai",
+				"new_yellow_lai",
+				"rainbow_lai",
+				"random_lai"
+			],
+			"value" : "exp_color",
+			"default_value" : 14
+		},
+		{
+			"type" : "multiple_choice",
+			"id" : "specialkilled_color_change",
+			"title" : "specialkilled_color_change_title",
+			"description" : "specialkilled_color_change_desc",
+			"callback" : "specialkilled_color_change_callback",
+			"items" : [
+				"pastel_pink_lai",
+        		"purple_lai",
+        		"aqua_lai",
+        		"strawb_lai",
+        		"orange_lai",
+        		"red_lai",
+        		"navy_lai",
+        		"pink_lai",
+        		"lilac_lai",
+        		"black_lai",
+        		"blue_violet_lai",
+        		"white_lai",
+				"green_lai",
+				"yellow_lai",
+				"new_yellow_lai",
+				"rainbow_lai",
+				"random_lai"
+			],
+			"value" : "specialkilled_color",
+			"default_value" : 2
+		},
+		{
+			"type" : "divider",
+			"size" : 30
+		},
+		{
+			"type" : "toggle",
+			"id" : "EXPOK_show_announcer",
+			"title" : "EXPOK_show_announcer_title",
+			"description" : "EXPOK_show_announcer_desc",
+			"callback" : "callback_EXPOK_show_announcer",
+			"value" : "show_announcer",
+			"default_value" : true
+		},
+        {
+			"type" : "slider",
+			"id" : "kln_duration_change",
+			"title" : "kln_duration_change_title",
+			"description" : "kln_duration_change_desc",
+			"callback" : "kln_duration_change_callback",
+            "max": 7,
+            "min": 0.5,
+            "step": 1,
+			"value" : "kln_duration",
+			"default_value" : 3
+		},
+        {
+			"type" : "slider",
+			"id" : "kln_font_size_change",
+			"title" : "kln_font_size_change_title",
+			"description" : "kln_font_size_change_desc",
+			"callback" : "kln_font_size_change_callback",
+            "max": 30,
+            "min": 5,
+            "step": 1,
+			"value" : "kln_font_size",
+			"default_value" : 12
+		},
+        {
+			"type" : "slider",
+			"id" : "kln_adjust_x_change",
+			"title" : "kln_adjust_x_change_title",
+			"description" : "kln_adjust_x_change_desc",
+			"callback" : "kln_adjust_x_change_callback",
+            "max": 200,
+            "min": 0,
+            "step": 1,
+			"value" : "kln_adjust_x",
+			"default_value" : 0
+		},
+        {
+			"type" : "slider",
+			"id" : "kln_adjust_y_change",
+			"title" : "kln_adjust_y_change_title",
+			"description" : "kln_adjust_y_change_desc",
+			"callback" : "kln_adjust_y_change_callback",
+            "max": 200,
+            "min": 0,
+            "step": 1,
+			"value" : "kln_adjust_y",
+			"default_value" : 0
+		},
+        {
+			"type" : "divider",
+			"size" : 30
+		},
+		{
+			"type" : "multiple_choice",
+			"id" : "shortcut_choice_exp",
+			"title" : "shortcut_choice_exp_title",
+			"description" : "shortcut_choice_exp_desc",
+			"callback" : "shortcut_choice_exp_callback",
+			"items" : [
+				"OLD_EXP",
+        		"NEW_XP"
+			],
+			"value" : "shortcut_choice_exp",
+			"default_value" : 2
+		},
+		{
+			"type" : "multiple_choice",
+			"id" : "exp_fade_out_style",
+			"title" : "exp_fade_out_style_title",
+			"description" : "exp_fade_out_style_desc",
+			"callback" : "exp_fade_out_style_callback",
+			"items" : [
+				"OLD_FADEOUT_EXP",
+        		"NEW_FADEOUT_XP"
+			],
+			"value" : "exp_fade_out_style",
+			"default_value" : 1
+		},
+		{
+			"type" : "slider",
+			"id" : "exp_text_duration_change",
+			"title" : "exp_text_duration_change_title",
+			"description" : "exp_text_duration_change_desc",
+			"callback" : "exp_text_duration_change_callback",
+            "max": 7,
+            "min": 0.5,
+            "step": 1,
+			"value" : "exp_text_duration",
+			"default_value" : 5
+		},
+        {
+			"type" : "slider",
+			"id" : "exp_font_size_change",
+			"title" : "exp_font_size_change_title",
+			"description" : "exp_font_size_change_desc",
+			"callback" : "exp_font_size_change_callback",
+            "max": 30,
+            "min": 5,
+            "step": 1,
+			"value" : "exp_font_size",
+			"default_value" : 15
+		},
+        {
+			"type" : "slider",
+			"id" : "exp_adjust_x_change",
+			"title" : "exp_adjust_x_change_title",
+			"description" : "exp_adjust_x_change_desc",
+			"callback" : "exp_adjust_x_change_callback",
+            "max": 200,
+            "min": 0,
+            "step": 1,
+			"value" : "exp_adjust_x",
+			"default_value" : 0
+		},
+        {
+			"type" : "slider",
+			"id" : "exp_adjust_y_change",
+			"title" : "exp_adjust_y_change_title",
+			"description" : "exp_adjust_y_change_desc",
+			"callback" : "exp_adjust_y_change_callback",
+            "max": 200,
+            "min": 0,
+            "step": 1,
+			"value" : "exp_adjust_y",
+			"default_value" : 0
+		}
+	]
+}

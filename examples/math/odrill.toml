@@ -1,0 +1,5 @@
+[package]
+name = "math"
+version = "1.0.0"
+description = "Math utilities missing from Payday 2 Lua"
+authors = ["Odrill Official Team"]

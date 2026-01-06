@@ -1,0 +1,36 @@
+assets = ["menu/options.txt", "icon.png", "loc"]
+
+[package]
+name = "experience-on-kill"
+version = "2.0.0"
+description = "Gain Exp On Kill - Rethinked Edition"
+authors = ["Freyah"]
+
+[[localization]]
+directory = "loc"
+default = "english.json"
+
+[[hooks]]
+id = "lib/managers/hudmanagerpd2"
+entry = "src/hooks/hudmanagerpd2/mod.lua"
+output = "hooks/hudmanagerpd2.lua"
+
+[[hooks]]
+id = "lib/managers/playermanager"
+entry = "src/hooks/playermanager/mod.lua"
+output = "hooks/playermanager.lua"
+
+[[hooks]]
+id = "lib/managers/menumanager"
+entry = "src/hooks/menumanager/mod.lua"
+output = "hooks/menumanager.lua"
+
+[[hooks]]
+id = "lib/managers/experiencemanager"
+entry = "src/hooks/experiencemanager/mod.lua"
+output = "hooks/experiencemanager.lua"
+
+[dependencies]
+math = "1.0.0"
+specials = "1.0.0"
+colors = "1.0.0"

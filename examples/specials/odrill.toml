@@ -1,0 +1,5 @@
+[package]
+name = "specials"
+version = "1.0.0"
+description = "Payday 2 special enemy types"
+authors = ["Odrill Official Team"]

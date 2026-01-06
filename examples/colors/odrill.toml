@@ -1,0 +1,5 @@
+[package]
+name = "colors"
+version = "1.0.0"
+description = "Color utilities and presets for Payday 2"
+authors = ["Odrill Official Team"]
