@@ -5,7 +5,7 @@
 
 use mods::hud::classic::animations::*
 use mods::hud::classic::texts::*
-use mods::hud::colors::*
+use mods::hud::colors::{pack_color, is_rainbow, animate_rainbow}
 use mods::utils::make_fine_text
 use mods::utils::get_hud_panel
 use mods::utils::is_special_active

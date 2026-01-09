@@ -61,3 +61,9 @@ local function animate_rainbow(text_element)
         coroutine.yield()
     end
 end
+
+return {
+    pack_color = pack_color,
+    is_rainbow = is_rainbow,
+    animate_rainbow = animate_rainbow
+}

@@ -1,0 +1,11 @@
+[package]
+name = "linter"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+description = "Lua linter with static analysis for Payday 2 mods"
+
+[dependencies]
+full_moon = { version = "2", features = ["lua52"] }
+thiserror.workspace = true

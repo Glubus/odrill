@@ -12,6 +12,7 @@ path = "src/main.rs"
 
 [dependencies]
 compiler = { path = "../../libs/compiler" }
+linter = { path = "../../libs/linter" }
 clap.workspace = true
 colored.workspace = true
 anyhow.workspace = true

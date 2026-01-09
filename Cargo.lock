@@ -370,6 +370,7 @@ name = "compiler"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "full_moon 1.2.0",
  "pkg",
  "regex",
  "serde",
@@ -633,6 +634,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cb4cb245038516f5f85277875cdaa4f7d2c9a0fa0468de06ed190163b1581fcf"
 dependencies = [
  "percent-encoding",
+]
+
+[[package]]
+name = "full_moon"
+version = "1.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9a02c056a5966f6db8e663ee48093280f098d68d97763a94490ee63178d54776"
+dependencies = [
+ "bytecount",
+ "cfg-if",
+ "derive_more",
+ "full_moon_derive",
+ "paste",
+ "serde",
+ "smol_str",
 ]
 
 [[package]]
@@ -1173,6 +1189,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "linter"
+version = "0.1.0"
+dependencies = [
+ "full_moon 2.1.0",
+ "thiserror 2.0.17",
+]
+
+[[package]]
 name = "linux-raw-sys"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1336,6 +1360,7 @@ dependencies = [
  "ctrlc",
  "dirs",
  "hex",
+ "linter",
  "pkg",
  "reqwest",
  "rkyv",
@@ -1941,7 +1966,7 @@ dependencies = [
  "crossbeam-channel",
  "ec4rs",
  "env_logger",
- "full_moon",
+ "full_moon 2.1.0",
  "globset",
  "ignore",
  "lazy_static",

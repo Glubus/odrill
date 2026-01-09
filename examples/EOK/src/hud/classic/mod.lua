@@ -5,7 +5,7 @@
 
 use mods::hud::classic::animations::*
 use mods::hud::classic::texts::*
-use mods::hud::colors::*
+use mods::hud::colors::{pack_color, is_rainbow, animate_rainbow}
 use math::round
 use mods::utils::make_fine_text
 use mods::utils::get_hud_panel
@@ -26,7 +26,7 @@ end
 function HUDManager:_force_remove_bonus_xp()
     if not self._exp_bonus then return end
     
-    local hud, panel = get_hud_panel()
+    local _, panel = get_hud_panel()
     if not panel then return end
     
     local child = panel:child("exp_bonus_text____")

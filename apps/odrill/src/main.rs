@@ -36,6 +36,13 @@ enum Commands {
         watch: bool,
     },
 
+    /// Check project for issues (deps, lint)
+    Check {
+        /// Attempt to auto-fix issues
+        #[arg(long)]
+        fix: bool,
+    },
+
     /// Clean build artifacts
     Clean,
 
@@ -79,6 +86,16 @@ enum Commands {
 
     /// Manage templates
     Templates(commands::templates::TemplatesArgs),
+
+    /// Generate documentation
+    Doc {
+        /// Output format (html, markdown, both)
+        #[arg(short, long, default_value = "html")]
+        format: String,
+        /// Output directory
+        #[arg(short, long, default_value = "docs")]
+        output: String,
+    },
 }
 
 fn main() {
@@ -87,6 +104,7 @@ fn main() {
     let result = match cli.command {
         Commands::New(args) => commands::new::run(args),
         Commands::Build { force, watch } => commands::build::run(force, watch),
+        Commands::Check { fix } => commands::check::run(fix),
         Commands::Clean => commands::clean::run(),
         Commands::Add { hook_id, output } => commands::add::run(&hook_id, output.as_deref()),
         Commands::Fmt { check } => commands::fmt::run(commands::fmt::FmtArgs { check }),
@@ -101,6 +119,7 @@ fn main() {
         }
         Commands::Config(args) => commands::config::run(args),
         Commands::Templates(args) => commands::templates::run(args),
+        Commands::Doc { format, output } => commands::doc::run(&format, &output),
     };
 
     if let Err(e) = result {

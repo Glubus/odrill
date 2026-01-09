@@ -33,8 +33,7 @@ function HUDManager:_force_remove_bonus_xp()
     local hud = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
     if not hud or not hud.panel then return end
     
-    local panel = hud.panel
-    local child = panel:child("exp_bonus_text____")
+    local child = hud.panel:child("exp_bonus_text____")
     if not child or not alive(child) then return end
     if self.played_anim_b then
         self._bonus_xp_earned = nil
@@ -44,7 +43,7 @@ function HUDManager:_force_remove_bonus_xp()
     local bonus_xp = self._exp_bonus
     local fade_dir = get_option("exp_fade_out_style", 1) - 1
     
-    bonus_xp:animate(function(o)
+    bonus_xp:animate(function()
         local t = 1
         while t > 0 and alive(bonus_xp) do
             local dt = coroutine.yield()
@@ -64,10 +63,9 @@ function HUDManager:_force_remove_bonus_modern()
     if self._bonus_exp_text then
         local hud = managers.hud:script(PlayerBase.PLAYER_INFO_HUD_FULLSCREEN_PD2)
         if hud and hud.panel then
-            local panel = hud.panel
-            local child = panel:child("bonus_exp_text")
+            local child = hud.panel:child("bonus_exp_text")
             if child and alive(child) then
-                panel:remove(child)
+                hud.panel:remove(child)
             end
         end
     end
